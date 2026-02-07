@@ -26,9 +26,9 @@ La API utiliza JWT para proteger las rutas privadas.
 | Método | Ruta | Descripción |
 |------|------|-----------|
 | GET | /tasks | Listar tareas |
-| POST | /tasks | Crear tarea |
+| POST | /tasks/post | Crear tarea |
 | PUT | /tasks/:id | Actualizar |
-| DELETE | /tasks/:id | Eliminar |
+| DELETE | /tasks/id/:id | Eliminar |
 | POST | /auth/login | Login |
 
 ## 🗄️ Base de datos
