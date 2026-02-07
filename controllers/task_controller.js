@@ -77,3 +77,36 @@ export const modifyTaskById = async (req, res) =>{
     res.json({ ok: true, message: "Tarea actualizada", data: data[0] });
 
 };
+
+
+export const toggleTask = async (req, res) => {
+    const { id } = req.params;
+
+    // 1️⃣ Obtener el estado actual
+    const { data: task, error: fetchError } = await supabase
+        .from("tasks")
+        .select("completada")
+        .eq("id", id)
+        .single();
+
+    if (fetchError || !task) {
+        return res.status(404).json({ ok: false, message: "Tarea no encontrada" });
+    }
+
+    // 2️⃣ Invertir
+    const newValue = !task.completada;
+
+    // 3️⃣ Guardar
+    const { data, error } = await supabase
+        .from("tasks")
+        .update({ completada: newValue })
+        .eq("id", id)
+        .select()
+        .single();
+
+    if (error) {
+        return res.status(500).json({ ok: false, error });
+    }
+
+    res.json({ ok: true, message: "Tarea actualizada", data });
+};
