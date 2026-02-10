@@ -1,4 +1,3 @@
-import { supabase } from "../db/supabase.js";
 import {getTasksService, deleteTaskService, postTaskService, modifyTaskByIdService, toggleTaskService } from "../services/taskService.js"
 
 export const getAllTask = async (req, res) => {
@@ -15,15 +14,9 @@ export const getAllTask = async (req, res) => {
     }
 };
 
-
 export const deleteTask = async (req, res) => {
     try {
         const { id } = req.params;
-
-        if (!id) {
-            return res.status(400).json({ ok: false, message: "ID es requerido" });
-        }
-
         const data = await deleteTaskService(id);
 
         if (!data || data.length === 0) {
@@ -44,7 +37,6 @@ export const deleteTask = async (req, res) => {
 export const postNewTask = async (req, res) => {
     try {
         const { texto } = req.body;
-
         const data = await postTaskService(texto);
 
         res.status(201).json({ ok: true, data });
@@ -56,7 +48,6 @@ export const postNewTask = async (req, res) => {
         });
     }
 };
-
 
 export const modifyTaskById = async (req, res) => {
     try {
