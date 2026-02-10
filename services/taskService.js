@@ -46,21 +46,21 @@ export async function modifyTaskByIdService(id, texto) {
 
     return data;
 }
-
 export async function toggleTaskService(id) {
-
+    // Intento leer el registro actual
     const { data: task, error: fetchError } = await supabase
         .from("tasks")
         .select("completada")
         .eq("id", id)
         .single();
 
-    if (fetchError || !task) {
-        throw new Error("Tarea no encontrada");
-    }
+    if (fetchError) throw fetchError;
+    if (!task) throw new Error("Tarea no encontrada");
 
+    // Invertimos el valor
     const newValue = !task.completada;
 
+    // Guardamos
     const { data, error } = await supabase
         .from("tasks")
         .update({ completada: newValue })
@@ -69,6 +69,7 @@ export async function toggleTaskService(id) {
         .single();
 
     if (error) throw error;
-    if (!data) throw new Error("No encontrado");
+
     return data;
 }
+

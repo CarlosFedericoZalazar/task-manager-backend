@@ -1,5 +1,5 @@
 import { supabase } from "../db/supabase.js";
-import {getTasksService, deleteTaskService, postTaskService, modifyTaskByIdService} from "../services/taskService.js"
+import {getTasksService, deleteTaskService, postTaskService, modifyTaskByIdService, toggleTaskService } from "../services/taskService.js"
 
 export const getAllTask = async (req, res) => {
     try {
@@ -79,7 +79,6 @@ export const modifyTaskById = async (req, res) => {
     }
 };
 
-
 export const toggleTask = async (req, res) => {
     try {
         const { id } = req.params;
@@ -92,11 +91,6 @@ export const toggleTask = async (req, res) => {
         if (error.message === "Tarea no encontrada") {
             return res.status(404).json({ ok: false, message: error.message });
         }
-
-        res.status(500).json({
-            ok: false,
-            message: error.message
-        });
+        return res.status(500).json({ ok: false, error: error.message });
     }
 };
-
