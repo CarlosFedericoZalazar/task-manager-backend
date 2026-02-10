@@ -4,6 +4,13 @@
 API REST para gestionar tareas de usuarios.
 Permite crear, editar, completar y eliminar tareas con persistencia en base de datos y autenticación.
 
+## Estructura del proyecto
+- controllers/
+- db
+- middlewares/
+- routes/
+- services/
+
 ## 🧠 Qué ofrece
 - CRUD de tareas
 - Filtros por estado
@@ -16,8 +23,6 @@ Permite crear, editar, completar y eliminar tareas con persistencia en base de d
 - Nodemon (Desarrollo)
 - Express
 - PostgreSQL (Supabase)
-- JWT
-- Middleware de autenticación
 
 ## 🔐 Autenticación
 La API utiliza JWT para proteger las rutas privadas.
